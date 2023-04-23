@@ -6,10 +6,13 @@ import transactionSchema from "../schemas/transaction.schema.js";
 
 const transactionRoutes = Router();
 
-transactionRoutes.use(authValidation);
-
-transactionRoutes.post("/transactions/:type", validateSchema(transactionSchema), transactionsController.create);
-transactionRoutes.get("/transactions", transactionsController.read);
+transactionRoutes.post(
+  "/transactions/:type",
+  authValidation,
+  validateSchema(transactionSchema),
+  transactionsController.create
+);
+transactionRoutes.get("/transactions", authValidation, transactionsController.read);
 
 // transactionRoutes.delete("/transactions/:transactionId", del);
 // transactionRoutes.put("/transactions/:transactionId", update);
