@@ -1,20 +1,19 @@
 import "dotenv/config";
-import fetch from "node-fetch";
+import axios from "axios";
 
-const DEPLOY_URL = process.env.DEPLOY_URL;
+const KEEPALIVE_URL = process.env.KEEPALIVE_URL;
+
+function startKeepAlive() {
+  KEEPALIVE_URL ? setInterval(keepAlive, 30000) : console.log("KEEPALIVE_URL is not defined!");
+}
 
 async function keepAlive() {
-  if (!DEPLOY_URL) {
-    console.log("URL not defined");
-    return;
-  }
-
   try {
-    const response = await fetch(DEPLOY_URL);
-    console.log(`Response status: ${response.status}`);
+    const response = await axios.get(KEEPALIVE_URL);
+    console.log(`Server kept alive. Response status: ${response.status}`);
   } catch (error) {
     console.error(error);
   }
 }
 
-export default keepAlive;
+export default startKeepAlive;

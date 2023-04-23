@@ -7,6 +7,7 @@ const routes = Router();
 routes.use(usersRoutes);
 routes.use("/transactions", transactionRoutes);
 
+routes.get("/keep-alive", (_req, res) => res.sendStatus(200));
 routes.all("*", (_req, res) => {
   res.sendStatus(404);
 });
