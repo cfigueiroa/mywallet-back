@@ -1,9 +1,9 @@
 import cors from "cors";
 import express from "express";
 import "express-async-errors";
+import errorMiddleware from "./middlewares/error.middleware.js";
 import routes from "./routes/index.routes.js";
 import startKeepAlive from "./utils/keepAlive.js";
-import errorMiddleware from "./middlewares/error.middleware.js";
 
 const app = express();
 

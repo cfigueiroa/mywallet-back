@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
+import { v4 as uuid } from "uuid";
 import db from "../database/database.connection.js";
 import errors from "../errors/index.js";
-import { v4 as uuid } from "uuid";
 
 async function register(req, res) {
   const { email, password } = req.body;

@@ -1,7 +1,7 @@
 import db from "../database/database.connection.js";
 import errors from "../errors/index.js";
 
-export async function authValidation(req, res, next) {
+async function authValidation(req, res, next) {
   const { authorization } = req.headers;
   const token = authorization?.replace("Bearer ", "");
   if (!token) throw errors.unauthorized();
@@ -13,3 +13,5 @@ export async function authValidation(req, res, next) {
 
   next();
 }
+
+export default authValidation;

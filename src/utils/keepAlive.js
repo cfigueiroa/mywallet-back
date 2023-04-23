@@ -1,5 +1,5 @@
-import "dotenv/config";
 import axios from "axios";
+import "dotenv/config";
 
 const KEEPALIVE_URL = process.env.KEEPALIVE_URL;
 const INTERVAL_DURATION = 30000;
