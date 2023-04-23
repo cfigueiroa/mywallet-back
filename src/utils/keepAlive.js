@@ -2,17 +2,22 @@ import "dotenv/config";
 import axios from "axios";
 
 const KEEPALIVE_URL = process.env.KEEPALIVE_URL;
+const INTERVAL_DURATION = 30000;
 
 function startKeepAlive() {
-  KEEPALIVE_URL ? setInterval(keepAlive, 30000) : console.log("KEEPALIVE_URL is not defined!");
+  if (KEEPALIVE_URL) {
+    console.log(`Starting keep-alive requests to ${KEEPALIVE_URL} every ${INTERVAL_DURATION}ms.`);
+    setInterval(keepAlive, INTERVAL_DURATION);
+  } else {
+    console.log("KEEPALIVE_URL is not defined. Keep-alive requests will not be sent.");
+  }
 }
 
 async function keepAlive() {
   try {
-    const response = await axios.get(KEEPALIVE_URL);
-    console.log(`Server kept alive. Response status: ${response.status}`);
+    await axios.get(KEEPALIVE_URL);
   } catch (error) {
-    console.error(error);
+    console.log(`Error sending keep-alive request to ${KEEPALIVE_URL}:`, error);
   }
 }
 

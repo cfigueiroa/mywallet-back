@@ -5,7 +5,7 @@ import transactionRoutes from "./transactions.routes.js";
 const routes = Router();
 
 routes.use(usersRoutes);
-routes.use("/transactions", transactionRoutes);
+routes.use(transactionRoutes);
 
 routes.get("/keep-alive", (_req, res) => res.sendStatus(200));
 routes.all("*", (_req, res) => {
